@@ -19,9 +19,9 @@ export default function Home() {
         <Typography variant="h2">Welcome to my website!</Typography>
       </div>
 
-      <div className="flex justify-center">
-        <a href="https://github.com/goinhasf" target="_blank">
-          <IconButton variant="text">
+      <div className="flex justify-center my-4">
+        <a href="https://github.com/goinhasf" target="_blank" className="mx-1">
+          <IconButton variant="filled">
             <i className="fab fa-github text-lg" />
           </IconButton>
         </a>
@@ -29,14 +29,15 @@ export default function Home() {
         <a
           href="https://www.linkedin.com/in/francisco-goinhas-416477125/"
           target="_blank"
+          className="mx-1"
         >
-          <IconButton variant="text">
-            <i className="fab fa-linkedin text-lg text-light-blue-800" />
+          <IconButton variant="filled" className="bg-light-blue-800">
+            <i className="fab fa-linkedin text-lg" />
           </IconButton>
         </a>
       </div>
 
-      <div className="flex justify-center mx-8 md:mx-32 my-6">
+      <div className="flex justify-center mx-8 md:mx-[20%] my-8">
         <Typography variant="paragraph">
           I’m a Software Engineer based in the UK. I’ve got 3+ years of
           experience developing software for companies in health care,

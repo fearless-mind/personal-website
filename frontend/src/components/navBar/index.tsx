@@ -23,7 +23,7 @@ const NavItem: FunctionComponent<ItemProps> = ({
       <Link href={href}>
         <Button
           fullWidth
-          className="flex shadow-none border-blue-100 border-2 md:justify-center md:px-4 md:py-2 rounded-full bg-transparent md:bg-blue-100 hover:bg-blue-50"
+          className="flex shadow-none bg-blue-100 dark:bg-blue-100 border-blue-100 border-2 md:justify-center md:px-4 md:py-2 rounded-full bg-transparen  dark: hover:bg-blue-50"
         >
           <div className="hidden md:flex justify-center md:my-0">{icon}</div>
 
@@ -55,10 +55,10 @@ export function Navbar({ title }: NavbarProps) {
   ));
 
   return (
-    <nav className="bg-blue-50 w-full md:w-fit md:h-full shadow-sm">
+    <nav className="dark:bg-blue-gray-900 bg-blue-50 w-full md:w-full md:h-full shadow-sm">
       <div className="flex justify-center items-center w-full md:h-full">
         <div className="md:hidden flex w-full p-4">
-          <Typography className="text-onTertiaryContainer font-normal">
+          <Typography className="text-onTertiaryContainer dark:text-white font-normal">
             {title}
           </Typography>
         </div>
@@ -69,7 +69,7 @@ export function Navbar({ title }: NavbarProps) {
 
         <IconButton
           variant="text"
-          className="md:hidden m-4 h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+          className="md:hidden m-4 h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden "
           ripple={false}
           onClick={() => setOpen(!open)}
         >
@@ -77,7 +77,7 @@ export function Navbar({ title }: NavbarProps) {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              className="h-6 w-6 stroke-onSecondaryContainer"
+              className="h-6 w-6 stroke-onSecondaryContainer dark:stroke-white"
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
@@ -91,7 +91,7 @@ export function Navbar({ title }: NavbarProps) {
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 stroke-onSecondaryContainer"
+              className="h-6 w-6 stroke-onSecondaryContainer dark:stroke-white"
               fill="none"
               stroke="currentColor"
               strokeWidth={2}
@@ -107,7 +107,7 @@ export function Navbar({ title }: NavbarProps) {
       </div>
 
       <Collapse
-        className="md:hidden shadow-sm absolute bg-blue-50 z-50"
+        className="md:hidden shadow-sm absolute bg-blue-50 dark:bg-blue-gray-900 z-50"
         open={open}
       >
         {navlist}

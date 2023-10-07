@@ -8,7 +8,9 @@ type IconProps = {
 };
 
 const Icon: FunctionComponent<IconProps> = ({ text }) => (
-  <span className="material-icons-outlined text-secondary">{text}</span>
+  <span className="material-icons-outlined text-secondary dark:text-blue-gray-800">
+    {text}
+  </span>
 );
 
 export const items: Item[] = [

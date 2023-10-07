@@ -20,7 +20,9 @@ export const PageLayout: FunctionComponent<PageLayoutProps> = ({
   children,
 }) => {
   return (
-    <main className={`${inter.className} md:flex h-full`}>
+    <main
+      className={`${inter.className} md:flex h-full  bg-surface dark:bg-black dark:text-white`}
+    >
       <Head>
         <title>{['Francisco Goinhas', title].join(' - ')}</title>
         <meta
@@ -29,8 +31,11 @@ export const PageLayout: FunctionComponent<PageLayoutProps> = ({
           key="title"
         />
       </Head>
-      <Navbar title={title} />
-      <div className="basis-11/12">
+      <div className="basis-1/12">
+        <Navbar title={title} />
+      </div>
+
+      <div className="w-full">
         <div className="hidden md:block">
           <Topbar title={title} />
         </div>
