@@ -75,6 +75,7 @@ web_modules/
 
 # Yarn Integrity file
 .yarn-integrity
+.yarn/
 
 # dotenv environment variable files
 .env
@@ -178,7 +179,8 @@ terraform.rc
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*

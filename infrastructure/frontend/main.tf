@@ -61,6 +61,29 @@ resource "aws_cloudfront_distribution" "this" {
 
 }
 
+data "aws_iam_policy_document" "cloudfront_access" {
+  statement {
+    effect = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+    actions   = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.origin.arn}/*"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values   = [aws_cloudfront_distribution.this.arn]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "cloudfront_access" {
+  bucket = aws_s3_bucket.origin.bucket
+  policy = data.aws_iam_policy_document.cloudfront_access.json
+}
+
 output "s3_bucket_arn" {
   value = aws_s3_bucket.origin.arn
 }

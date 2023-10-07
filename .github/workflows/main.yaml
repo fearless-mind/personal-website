@@ -1,7 +1,10 @@
 # Sample workflow to access AWS resources when workflow is tied to branch
 # The workflow Creates static website using aws s3
 name: Deploy personal website
-on: push
+on:
+  push:
+    paths:
+      - "frontend/**"
 env:
   BUCKET_NAME: "185284124654-personal-website"
   AWS_REGION: "eu-west-1"
