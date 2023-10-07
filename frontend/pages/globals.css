@@ -16,7 +16,16 @@
   }
 }
 
+html {
+  height: 100%;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: white;
+  height: 100%;
+}
+
+#__next {
+  height: 100%;
 }

@@ -8,11 +8,6 @@ resource "aws_s3_bucket" "origin" {
   bucket = local.bucket
 }
 
-resource "aws_s3_bucket_acl" "this" {
-  bucket = aws_s3_bucket.origin.bucket
-  acl    = "private"
-}
-
 resource "aws_cloudfront_origin_access_control" "this" {
   name                              = local.bucket
   origin_access_control_origin_type = "s3"
@@ -21,6 +16,10 @@ resource "aws_cloudfront_origin_access_control" "this" {
 }
 
 resource "aws_cloudfront_distribution" "this" {
+  tags = {
+    product = "personal-website"
+  }
+
   origin {
     domain_name              = aws_s3_bucket.origin.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.this.id
@@ -60,4 +59,8 @@ resource "aws_cloudfront_distribution" "this" {
     cloudfront_default_certificate = true
   }
 
+}
+
+output "s3_bucket_arn" {
+  value = aws_s3_bucket.origin.arn
 }
