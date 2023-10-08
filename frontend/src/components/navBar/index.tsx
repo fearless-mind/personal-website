@@ -2,11 +2,11 @@
 
 import { Button, Collapse, IconButton, Typography } from '@/src/material';
 import Link from 'next/link';
-import { FunctionComponent, ReactNode, useState } from 'react';
-import { items } from './items';
+import { useRouter } from 'next/router';
+import { FunctionComponent, useState } from 'react';
 
 export type Item = {
-  icon: ReactNode;
+  icon: string;
   label: string;
   href: string;
 };
@@ -18,17 +18,39 @@ type ItemProps = {
 const NavItem: FunctionComponent<ItemProps> = ({
   item: { icon, label, href },
 }) => {
+  const router = useRouter();
+  const isActive = router.route === href;
+
   return (
     <div className="mx-2 my-2 md:my-6">
       <Link href={href}>
         <Button
           fullWidth
-          className="flex shadow-none bg-blue-100 dark:bg-blue-100 border-blue-100 border-2 md:justify-center md:px-4 md:py-2 rounded-full bg-transparen  dark: hover:bg-blue-50"
+          variant="text"
+          className={`${
+            isActive
+              ? 'bg-secondaryFixed border-secondary'
+              : 'bg-transparent border-transparent'
+          } group flex md:justify-center border-2 md:px-4 md:py-2 rounded-full hover:bg-secondaryFixed hover:border-secondaryFixed`}
         >
-          <div className="hidden md:flex justify-center md:my-0">{icon}</div>
+          <div className="hidden md:flex justify-center md:my-0">
+            <span
+              className={`${
+                isActive
+                  ? 'text-blue-gray-800 dark:text-blue-gray-800'
+                  : 'text-secondary'
+              } material-icons-outlined dark:text-secondaryFixed group-hover:text-blue-gray-800`}
+            >
+              {icon}
+            </span>
+          </div>
 
           <div className="md:hidden flex items-center">
-            <div className="mr-4">{icon}</div>
+            <div className="mr-4">
+              <span className="material-icons-outlined text-secondary dark:text-secondaryFixed">
+                {icon}
+              </span>
+            </div>
             <Typography className="text-xs text-onTertiaryContainer">
               {label}
             </Typography>
@@ -45,9 +67,10 @@ const NavItem: FunctionComponent<ItemProps> = ({
 
 type NavbarProps = {
   title?: string;
+  items: Item[];
 };
 
-export function Navbar({ title }: NavbarProps) {
+export function Navbar({ title, items }: NavbarProps) {
   const [open, setOpen] = useState(false);
 
   const navlist = items.map((item) => (

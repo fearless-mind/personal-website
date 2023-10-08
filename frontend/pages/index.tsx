@@ -1,6 +1,5 @@
 'use client';
 
-import { PageLayout } from '@/src/layouts/pageLayout';
 import { Avatar, IconButton, Typography } from '@material-tailwind/react';
 
 export default function Home() {
@@ -13,7 +12,7 @@ export default function Home() {
   );
 
   return (
-    <PageLayout title="Home">
+    <>
       <div className="flex justify-center my-10 mx-8">{avatar}</div>
       <div className="my-1 mx-8 text-center">
         <Typography variant="h2">Welcome to my website!</Typography>
@@ -45,6 +44,14 @@ export default function Home() {
           IoT, Cloud and Entrepreneurship. I’m also a big advocate of TDD.
         </Typography>
       </div>
-    </PageLayout>
+    </>
   );
+}
+
+export function getStaticProps() {
+  return {
+    props: {
+      title: 'Home',
+    },
+  };
 }

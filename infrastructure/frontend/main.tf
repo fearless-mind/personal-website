@@ -31,9 +31,9 @@ resource "aws_cloudfront_distribution" "this" {
   default_root_object = "index.html"
 
   custom_error_response {
-    error_code         = 404
-    response_page_path = "/index.html"
-    response_code      = 200
+    error_code         = 403
+    response_page_path = "/404.html"
+    response_code      = 404
   }
 
   default_cache_behavior {
