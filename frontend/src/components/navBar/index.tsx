@@ -20,7 +20,9 @@ const NavItem: FunctionComponent<ItemProps> = ({
 }) => {
   const router = useRouter();
   const isActive = router.route === href;
-
+  const iconStyle = `${
+    isActive ? 'text-blue-gray-800 dark:text-blue-gray-800' : 'text-secondary'
+  } material-icons-outlined group-hover:text-blue-gray-800`;
   return (
     <div className="mx-2 my-2 md:my-6">
       <Link href={href}>
@@ -34,24 +36,20 @@ const NavItem: FunctionComponent<ItemProps> = ({
           } group flex md:justify-center border-2 md:px-4 md:py-2 rounded-full hover:bg-secondaryFixed hover:border-secondaryFixed`}
         >
           <div className="hidden md:flex justify-center md:my-0">
-            <span
-              className={`${
-                isActive
-                  ? 'text-blue-gray-800 dark:text-blue-gray-800'
-                  : 'text-secondary'
-              } material-icons-outlined dark:text-secondaryFixed group-hover:text-blue-gray-800`}
-            >
-              {icon}
-            </span>
+            <span className={iconStyle}>{icon}</span>
           </div>
 
           <div className="md:hidden flex items-center">
             <div className="mr-4">
-              <span className="material-icons-outlined text-secondary dark:text-secondaryFixed">
-                {icon}
-              </span>
+              <span className={iconStyle}>{icon}</span>
             </div>
-            <Typography className="text-xs text-onTertiaryContainer">
+            <Typography
+              className={`${
+                isActive
+                  ? 'text-blue-gray-800'
+                  : 'text-onTertiaryContainer dark:text-white'
+              } text-xs group-hover:text-blue-gray-800`}
+            >
               {label}
             </Typography>
           </div>
