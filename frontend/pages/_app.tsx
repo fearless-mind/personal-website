@@ -7,56 +7,56 @@ import { Navbar } from '@/src/components/navBar';
 import { Topbar } from '@/src/components/topBar';
 
 export const items = [
-  {
-    label: 'Home',
-    icon: 'home',
-    href: '/',
-  },
-  {
-    label: 'Skills',
-    icon: 'build',
-    href: '/skills',
-  },
-  {
-    label: 'Experience',
-    icon: 'work_outline',
-    href: '/experience',
-  },
-  {
-    label: 'Projects',
-    icon: 'lightbulb',
-    href: '/projects',
-  },
-  {
-    label: 'Contact',
-    icon: 'contacts',
-    href: '/contact',
-  },
+	{
+		label: 'Home',
+		icon: 'home',
+		href: '/',
+	},
+	{
+		label: 'Skills',
+		icon: 'build',
+		href: '/skills',
+	},
+	{
+		label: 'Experience',
+		icon: 'work_outline',
+		href: '/experience',
+	},
+	{
+		label: 'Projects',
+		icon: 'lightbulb',
+		href: '/projects',
+	},
+	{
+		label: 'Contact',
+		icon: 'contacts',
+		href: '/contact',
+	},
 ];
 
 type RootLayoutProps = PropsWithChildren<{
-  title: string;
+	title: string;
 }>;
 
 const RootLayout: FunctionComponent<RootLayoutProps> = ({
-  title,
-  children,
+	title,
+	children,
 }) => (
-  <PageLayout
-    title={title}
-    navBar={<Navbar title={title} items={items} />}
-    topBar={<Topbar title={title} />}
-  >
-    {children}
-  </PageLayout>
+	<PageLayout
+		title={title}
+		navBar={<Navbar title={title} items={items} />}
+		topBar={<Topbar title={title} />}
+	>
+		{children}
+	</PageLayout>
 );
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <ThemeProvider>
-      <RootLayout title={pageProps.title}>
-        <Component {...pageProps} />
-      </RootLayout>
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider>
+			<RootLayout title={pageProps.title}>
+				<Component {...pageProps} />
+			</RootLayout>
+		</ThemeProvider>
+	);
 }
