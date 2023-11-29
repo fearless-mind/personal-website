@@ -1,7 +1,36 @@
 
 locals {
-  origin_id = var.name
-  bucket    = "${var.account_id}-${var.name}"
+  origin_id   = var.name
+  bucket      = "${var.account_id}-${var.name}"
+  domain_name = "fearless-mind.net"
+}
+
+data "aws_route53_zone" "this" {
+  name = local.domain_name
+}
+
+resource "aws_route53_record" "ipv4" {
+  name    = "www.fearless-mind.net"
+  type    = "A"
+  zone_id = data.aws_route53_zone.this.id
+
+  alias {
+    zone_id                = aws_cloudfront_distribution.this.hosted_zone_id
+    name                   = aws_cloudfront_distribution.this.domain_name
+    evaluate_target_health = false
+  }
+}
+
+resource "aws_route53_record" "ipv6" {
+  name    = "www.fearless-mind.net"
+  type    = "AAAA"
+  zone_id = data.aws_route53_zone.this.id
+
+  alias {
+    zone_id                = aws_cloudfront_distribution.this.hosted_zone_id
+    name                   = aws_cloudfront_distribution.this.domain_name
+    evaluate_target_health = false
+  }
 }
 
 resource "aws_s3_bucket" "origin" {
@@ -19,6 +48,10 @@ resource "aws_cloudfront_distribution" "this" {
   tags = {
     product = "personal-website"
   }
+
+  aliases = [
+    "www.fearless-mind.net"
+  ]
 
   origin {
     domain_name              = aws_s3_bucket.origin.bucket_regional_domain_name
@@ -62,7 +95,9 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn            = var.acm_certificate_arn
+    ssl_support_method             = "sni-only"
+    cloudfront_default_certificate = false
   }
 
 }

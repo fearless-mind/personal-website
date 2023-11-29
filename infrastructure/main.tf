@@ -1,6 +1,13 @@
 provider "aws" {
   region  = "eu-west-1"
   profile = "kiko-dev"
+  alias   = "main"
+}
+
+provider "aws" {
+  region  = "us-east-1"
+  profile = "kiko-dev"
+  alias   = "useast1"
 }
 
 data "aws_caller_identity" "this" {}
@@ -11,9 +18,10 @@ locals {
 }
 
 module "frontend" {
-  source     = "./frontend"
-  account_id = data.aws_caller_identity.this.account_id
-  name       = local.personal_website_repo
+  source              = "./frontend"
+  account_id          = data.aws_caller_identity.this.account_id
+  name                = local.personal_website_repo
+  acm_certificate_arn = aws_acm_certificate.this.arn
 }
 
 data "aws_iam_policy_document" "deploy_s3" {

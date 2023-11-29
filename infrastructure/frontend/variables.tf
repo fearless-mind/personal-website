@@ -5,3 +5,7 @@ variable "account_id" {
 variable "name" {
   type = string
 }
+
+variable "acm_certificate_arn" {
+  type = string
+}
